@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Immersive 3D</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Library Three.js & QRCode Generator via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <!-- Canvas WebGL Latar Belakang 3D -->
+    <canvas id="webgl-canvas"></canvas>
+
+    <!-- Overlay UI Glassmorphism -->
+    <main class="ui-container">
+        
+        <!-- Cover Envelope Opening -->
+        <section id="cover-gate" class="glass-card center-content">
+            <div class="badge">Special Invitation</div>
+            <h1 id="header-names">Bima & Adinda</h1>
+            <p>Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+            <div id="guest-name-display" class="guest-highlight">Nama Tamu Undangan</div>
+            <div id="guest-badge" class="sub-badge">VIP Guest</div>
+            <button id="btn-open" onclick="openInvitation()">Buka Undangan</button>
+        </section>
+
+        <!-- Content Flow (Terbuka setelah diklik) -->
+        <article id="main-content" class="hidden">
+            <!-- Audio Controller -->
+            <audio id="bgm" loop src="assets/audio/bgm.mp3"></audio>
+
+            <section class="glass-card">
+                <h2>Akad & Resepsi</h2>
+                <p id="event-date">Minggu, 24 Oktober 2027</p>
+                <p id="event-location">Grand Ballroom Hotel Indonesia Kempinski</p>
+                <a id="btn-maps" target="_blank" class="btn">Buka Google Maps</a>
+            </section>
+
+            <!-- Galeri Fullscreen / Carousel -->
+            <section class="glass-card">
+                <h2>Galeri Sinematik</h2>
+                <div class="gallery-grid">
+                    <img src="assets/images/1.jpg" alt="Gallery 1" onclick="zoomImage(this)">
+                    <img src="assets/images/2.jpg" alt="Gallery 2" onclick="zoomImage(this)">
+                </div>
+            </section>
+
+            <!-- Form RSVP Buku Tamu -->
+            <section class="glass-card">
+                <h2>Konfirmasi Kehadiran (RSVP)</h2>
+                <form id="rsvp-form" onsubmit="submitRSVP(event)">
+                    <input type="text" id="rsvp-name" placeholder="Nama Anda" required readonly>
+                    <select id="rsvp-status" required>
+                        <option value="Hadir">Saya Akan Hadir</option>
+                        <option value="Tidak Hadir">Maaf, Belum Bisa Hadir</option>
+                    </select>
+                    <input type="number" id="rsvp-pax" placeholder="Jumlah Tamu (Maks 2)" min="1" max="2" value="1">
+                    <textarea id="rsvp-message" placeholder="Ucapan & Doa Retu"></textarea>
+                    <button type="submit" class="btn">Kirim RSVP</button>
+                </form>
+            </section>
+
+            <!-- Pass QR Code Digital -->
+            <section class="glass-card center-content">
+                <h2>Tiket Akses Digital</h2>
+                <p>Tunjukkan QR Code ini di meja penerima tamu untuk check-in mandiri:</p>
+                <div id="qrcode-access" class="qr-box"></div>
+            </section>
+        </article>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/3d-scene.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
